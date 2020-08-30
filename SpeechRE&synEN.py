@@ -22,7 +22,7 @@ with sr.Microphone() as source:
 
 
     except:
-        print("Error..TRY AGAIN ")
+        engine.say("Error..TRY AGAIN ")
 
 if PIN == PINen:
     engine.say("You entered the right PIN, we wish to you have  pleasant trip.")   # speech recognition [speech to text]
