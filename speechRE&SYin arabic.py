@@ -1,6 +1,15 @@
 import pyttsx3
 import speech_recognition as sr
 from pyttsx3 import Engine
+import random
+number = random.randint(1111,9999) #Generate a raandom PIN
+n=str(number)
+file = open("PIN","r+")
+file.write(n)
+file.close()
+file = open("PIN","r")
+PIN = file.read()
+file.close()
 ar_voice_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_arSA_NaayfM'
 engine: Engine = pyttsx3.init()
 engine.setProperty("rate", 190)
@@ -13,7 +22,16 @@ r = sr.Recognizer()
 with sr.Microphone() as source:
     audioPIN = r.listen(source)
     try:
-        PINAR = r.recognize_google(audioPIN, language="ar-AR") #speech recognition [speech to text]
-        print(PINAR)
+        PINAR = r.recognize_google(audioPIN, language="ar-AR") # speech recognition [speech to text]
+
     except:
-        print("حاول مرة أخرى")
+        engine.say("حاول مرة أخرى")
+
+
+if PINAR == PIN:
+    engine.say(u"لقد قمت بأدخال رمز القفل الصحيح  نتمنى لك رحلة ممتعة ")
+else:
+    engine.say(u"الرمز الذي قمت بإدخاله غير صحيح  ")
+engine.runAndWait()
+
+
